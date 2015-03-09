@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aura/sqlquery",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.SqlQuery.git",
-                "reference": "72286cc7b928fe9884d603cabf4d5969b93cc3af"
+                "reference": "666d2995e255fef7ae05038b370bf140c2b80876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.SqlQuery/zipball/72286cc7b928fe9884d603cabf4d5969b93cc3af",
-                "reference": "72286cc7b928fe9884d603cabf4d5969b93cc3af",
+                "url": "https://api.github.com/repos/auraphp/Aura.SqlQuery/zipball/666d2995e255fef7ae05038b370bf140c2b80876",
+                "reference": "666d2995e255fef7ae05038b370bf140c2b80876",
                 "shasum": ""
             },
             "require": {
@@ -71,7 +71,7 @@
                 "sqlserver",
                 "update"
             ],
-            "time": "2014-08-24 20:35:43"
+            "time": "2015-02-12 20:25:15"
         },
         {
             "name": "danielfpedro/mayhem",
@@ -79,12 +79,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danielfpedro/mayhem.git",
-                "reference": "95575f1576e136c154f5441b5baa094da6333bff"
+                "reference": "51d2ef0ceb150a891e3e0b5fba9f01fc58316dc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danielfpedro/mayhem/zipball/95575f1576e136c154f5441b5baa094da6333bff",
-                "reference": "95575f1576e136c154f5441b5baa094da6333bff",
+                "url": "https://api.github.com/repos/danielfpedro/mayhem/zipball/51d2ef0ceb150a891e3e0b5fba9f01fc58316dc4",
+                "reference": "51d2ef0ceb150a891e3e0b5fba9f01fc58316dc4",
                 "shasum": ""
             },
             "require": {
@@ -115,20 +115,20 @@
                 "source": "https://github.com/danielfpedro/mayhem/tree/master",
                 "issues": "https://github.com/danielfpedro/mayhem/issues"
             },
-            "time": "2015-01-28 18:13:10"
+            "time": "2015-03-05 13:36:09"
         },
         {
             "name": "slim/slim",
-            "version": "2.5.0",
+            "version": "2.6.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/codeguy/Slim.git",
-                "reference": "04958a10ed95bc7bc97568e573877d4f9b62db48"
+                "url": "https://github.com/slimphp/Slim.git",
+                "reference": "365dbfa0c02a31e76888eaec693dacd9dca1c82a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeguy/Slim/zipball/04958a10ed95bc7bc97568e573877d4f9b62db48",
-                "reference": "04958a10ed95bc7bc97568e573877d4f9b62db48",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/365dbfa0c02a31e76888eaec693dacd9dca1c82a",
+                "reference": "365dbfa0c02a31e76888eaec693dacd9dca1c82a",
                 "shasum": ""
             },
             "require": {
@@ -161,7 +161,7 @@
                 "rest",
                 "router"
             ],
-            "time": "2014-12-09 19:59:29"
+            "time": "2015-03-02 19:09:48"
         },
         {
             "name": "vlucas/valitron",
