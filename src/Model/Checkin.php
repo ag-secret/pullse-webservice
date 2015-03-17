@@ -11,12 +11,7 @@ class Checkin extends AppModel
 
 	public function beforeSave($data, $type)
 	{
-		$now = new DateTime;
-		if ($type == 'create') {
-			$data['created'] = $now->format('Y-m-d H:i:s');
-		}
-		
-		return $data;
+		return $this->setCurrentTimestamp($data, $type);
 	}
 
 }

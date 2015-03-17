@@ -19,7 +19,7 @@ class MessagesController extends AppController
 	public function add()
 	{
 		$data = $this->request->headerBodyJson;
-		$data['user_id'] = 1;
+		$data['user_id'] = $this->Auth->user->id;
 
 		if ($this->Message->save($data)) {
 			return $this->Response->success('ok');

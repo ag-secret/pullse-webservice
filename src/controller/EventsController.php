@@ -48,7 +48,7 @@ class EventsController extends AppController
 		$page = $this->request->get['page'];
 		$limit = 20;
 		$offset = $page * $limit;
-		$club_id = 1;
+		$club_id = $this->Auth->user->club_id;
 
 		$query = $this->Event->find();
 		$query
@@ -72,8 +72,8 @@ class EventsController extends AppController
 	{
 		$VipListSubscription = new VipListSubscription;
 
-		$user_id = 1;
-		$user_gender = 'f';
+		$user_id = $this->Auth->user->id;
+		$user_gender = $this->Auth->user->sexo;
 
 		$data = $this->request->headerBodyJson;
 		$data['user_id'] = $user_id;
