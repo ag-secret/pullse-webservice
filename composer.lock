@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aura/sqlquery",
-            "version": "2.2.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.SqlQuery.git",
-                "reference": "666d2995e255fef7ae05038b370bf140c2b80876"
+                "reference": "47524f97f4bfaa81e2c00be9f0add4cd343dbe27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.SqlQuery/zipball/666d2995e255fef7ae05038b370bf140c2b80876",
-                "reference": "666d2995e255fef7ae05038b370bf140c2b80876",
+                "url": "https://api.github.com/repos/auraphp/Aura.SqlQuery/zipball/47524f97f4bfaa81e2c00be9f0add4cd343dbe27",
+                "reference": "47524f97f4bfaa81e2c00be9f0add4cd343dbe27",
                 "shasum": ""
             },
             "require": {
@@ -71,7 +71,7 @@
                 "sqlserver",
                 "update"
             ],
-            "time": "2015-02-12 20:25:15"
+            "time": "2015-03-22 17:47:05"
         },
         {
             "name": "danielfpedro/mayhem",
@@ -79,12 +79,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danielfpedro/mayhem.git",
-                "reference": "236a4614e3cdac7d18f161591cdaf34218764db5"
+                "reference": "208688ea6337d7258be42e20297c958b67fd244c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danielfpedro/mayhem/zipball/236a4614e3cdac7d18f161591cdaf34218764db5",
-                "reference": "236a4614e3cdac7d18f161591cdaf34218764db5",
+                "url": "https://api.github.com/repos/danielfpedro/mayhem/zipball/208688ea6337d7258be42e20297c958b67fd244c",
+                "reference": "208688ea6337d7258be42e20297c958b67fd244c",
                 "shasum": ""
             },
             "require": {
@@ -115,7 +115,7 @@
                 "source": "https://github.com/danielfpedro/mayhem/tree/master",
                 "issues": "https://github.com/danielfpedro/mayhem/issues"
             },
-            "time": "2015-03-16 20:16:56"
+            "time": "2015-03-26 18:55:16"
         },
         {
             "name": "facebook/php-sdk-v4",

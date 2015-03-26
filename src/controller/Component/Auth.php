@@ -9,16 +9,6 @@ class Auth
 	public $user;
 	public $Model;
 
-	public $options = [
-		'fields' => [
-			'id' => 'id',
-			'token' => 'app_access_token',
-		],
-		'data' => [
-			'name'
-		]
-	];
-
 	function __construct($model, array $options = [])
 	{
 		$this->Model = $model;
@@ -71,8 +61,9 @@ class Auth
 
 	public function setCredentials($request, $slim)
 	{
-		$id = !isset($request->get[$this->options['fields']['id']]) ? null : $request->get[$this->options['fields']['id']];
-		$token = !isset($request->get[$this->options['fields']['token']]) ? null : $request->get[$this->options['fields']['token']];
+		$id = $request->query($this->options['fields']['id']);
+		$token = $request->query($this->options['fields']['token']);
+		
 		if (!$id) {
 			return $slim->halt(400, 'Você não informou o ID');
 		}

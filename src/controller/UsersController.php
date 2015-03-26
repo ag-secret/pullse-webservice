@@ -31,8 +31,8 @@ class UsersController extends AppController
 
 	public function getUserTeste()
 	{
-		$id = $this->request->get['id'];
-		$clubId = $this->request->get['club_id'];
+		$id = $this->Request->query('id');
+		$clubId = $this->Request->query('club_id');
 		$user = $this->User->getById($id, $clubId);
 
 		return $this->Response->success($user);
@@ -76,6 +76,8 @@ class UsersController extends AppController
 		$appAccessToken = $this->_appAccessTokenGenerator();
 
 		if ($account) {
+			$account->app_access_token = $appAccessToken;
+			
 			$data = [
 				'id' => $account->id,
 				'app_access_token' => $appAccessToken,

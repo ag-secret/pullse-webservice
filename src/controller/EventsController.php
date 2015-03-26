@@ -3,12 +3,8 @@
 namespace App\Controller;
 
 use App\Model\Event;
-
 use App\Model\VipListSubscription;
 
-/**
- * Controller for test, dont't care about.
- */
 class EventsController extends AppController
 {
 
@@ -20,9 +16,12 @@ class EventsController extends AppController
 		$this->Event = new Event;
 	}
 
-	public function index($value='')
+	/**
+	 * Carrega todos os eventos ativos e que ainda não expiraram
+	 */
+	public function index()
 	{
-		$club_id = 1;
+		$club_id = $this->Auth->user->club_id;
 
 		$query = $this->Event->find();
 		$query
@@ -34,6 +33,7 @@ class EventsController extends AppController
 				'Event.data_fim',
 				'Event.imagem_capa'
 			])
+			->where('Event.is_active = 1')
 			->where('Event.club_id = :club_id')
 			->where('Event.data_fim > CURRENT_TIMESTAMP')
 			->bindValues(['club_id' => $club_id]);
@@ -45,9 +45,7 @@ class EventsController extends AppController
 
 	public function getLists()
 	{
-		$page = $this->request->get['page'];
 		$limit = 20;
-		$offset = $page * $limit;
 		$club_id = $this->Auth->user->club_id;
 
 		$query = $this->Event->find();
@@ -58,8 +56,10 @@ class EventsController extends AppController
 				'Event.descricao_lista_vip'
 			])
 			->where('Event.club_id = :club_id')
+			->where('Event.is_active = 1')
+			->where('Event.lista_vip_dt_inicio <= CURRENT_TIMESTAMP')
+			->where('Event.lista_vip_dt_fim >= CURRENT_TIMESTAMP')
 			->where('(Event.lista_vip_qtd_fem > 0 OR Event.lista_vip_qtd_masc > 0)')
-			->offset($offset)
 			->limit($limit)
 			->bindValues(['club_id' => $club_id]);
 
@@ -68,6 +68,9 @@ class EventsController extends AppController
 		return $this->Response->success($eventos);
 	}
 
+	/**
+	 * Inscreve o usuario na no id do evento enviado 
+	 */
 	public function addVipListSubscription()
 	{
 		$VipListSubscription = new VipListSubscription;
@@ -75,18 +78,36 @@ class EventsController extends AppController
 		$user_id = $this->Auth->user->id;
 		$user_gender = $this->Auth->user->sexo;
 
-		$data = $this->request->headerBodyJson;
+		$data = [];
+		$data['event_id'] = $this->Request->json('event_id');
 		$data['user_id'] = $user_id;
+		/**
+		 * É necessario salvar o sexo do usuario na tabela de inscrições para
+		 * agilizar futuras consultas e nao precisar fazer JOIN na tabela users
+		 */
 		$data['sexo'] = $user_gender;
 
+		/**
+		 * As tres verificações abaixo devem retornar erro 403 para o app conseguir diferenciar um eventual erro de servidor
+		 * com estes 3 erros. Vale lembrar també que estas mensagens serão exatamente as que o app irá mostrar
+		 * no alert.
+		 */
+		
+		/**
+		 * Verifica se esta lista está disponível para o genero do usuario que requisitou a inscrição
+		 */
 		if (!$VipListSubscription->genderIsAvailable($user_gender, $data['event_id'])) {
 			return $this->Response->error(403, 'Você não pode se cadastrar nesta lista devido a restrição de gênero.');
 		}
-
+		/**
+		 * Verifica se o usuario já está cadastrado na lista
+		 */
 		if ($VipListSubscription->isSubscribed($data['user_id'], $data['event_id'])){
 			return $this->Response->error(403, 'Você já está cadastrado nesta lista');
 		}
-
+		/**
+		 * Verifica se a lista requisita ainda tem vagas disponíveis para o genero do usuario
+		 */
 		if (!$VipListSubscription->hasSubscriptionsLeft($data['sexo'], $data['event_id'])) {
 			return $this->Response->error(403, 'As vagas para esta lista já se esgotaram.');
 		}
@@ -100,17 +121,25 @@ class EventsController extends AppController
 
 	public function getCurrent()
 	{
-		$club_id = 1;
-
 		$query = $this->Event->find();
 
 		$query
-			->cols(['*'])
+			->cols([
+				'Event.id',
+				'Event.name',
+				'(
+					SELECT count(*) AS total 
+					FROM checkins Checkin
+					WHERE Checkin.event_id = Event.id AND Checkin.user_id = :user_id
+				) AS hasCheckin'
+			])
 			->where('Event.data_inicio <= CURRENT_TIMESTAMP')
 			->where('Event.data_fim >= CURRENT_TIMESTAMP')
+			->where('Event.is_active = 1')
 			->where('club_id = :club_id')
 			->bindValues([
-				'club_id' => $club_id
+				'user_id' => $this->Auth->user->id,
+				'club_id' => $this->Auth->user->club_id
 			]);
 
 		$event = $this->Event->one($query);

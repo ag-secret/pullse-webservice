@@ -16,37 +16,6 @@ class User extends AppModel
 	public $tableName = 'users';
 	public $tableAlias = 'User';
 
-	public function getHearts(array $options, $limit, $heartMe)
-	{
-		if ($heartMe) {
-			$condition = 'Heart.user_id1 = User.id 
-				AND Heart.user_id2 = :user_id 
-				AND Heart.event_id = :event_id 
-				AND Heart.id > :last_id';
-		} else {
-			$condition = 'Heart.user_id2 = User.id 	
-				AND Heart.user_id1 = :user_id 
-				AND Heart.event_id = :event_id 
-				AND Heart.id > :last_id';
-		}
-		$query = $this->find();
-		$query
-			->cols([
-				'User.id',
-				'User.name',
-				'Heart.id AS heart_id'
-			])
-			->join(
-				'INNER',
-				'hearts Heart',
-				$condition
-			)
-			->limit($limit)
-			->bindValues($options);
-
-		return $this->all($query);
-	}
-
 	public function getFacebookMe($session)
 	{
 		$params = ['fields' => 'id,email,name,gender,birthday'];

@@ -12,14 +12,18 @@ class MessagesController extends AppController
 	public function beforeFilter()
 	{
 		parent::beforeFilter();
-
 		$this->Message = new Message;
 	}
 
+	/**
+	 * Salva a mensagem vinda da view "Contato" do aplicativo
+	 */
 	public function add()
 	{
-		$data = $this->request->headerBodyJson;
-		$data['user_id'] = $this->Auth->user->id;
+		$data = [
+			'user_id' => $this->Auth->user->id,
+			'mensagem' => $this->Request->json('mensagem'),
+		];
 
 		if ($this->Message->save($data)) {
 			return $this->Response->success('ok');

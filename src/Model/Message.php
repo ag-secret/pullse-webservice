@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use App\Model\AppModel;
-
 use Datetime;
 
 class Message extends AppModel
@@ -13,12 +12,9 @@ class Message extends AppModel
 
 	public function beforeSave($data, $type)
 	{
-
 		$now = new Datetime;
 		if ($type == 'create') {
 			$data['created'] = $now->format('Y-m-d H:i:s');
-		} else {
-			$data['modified'] = $now->format('Y-m-d H:i:s');
 		}
 		
 		return $data;

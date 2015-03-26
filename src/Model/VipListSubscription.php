@@ -89,12 +89,22 @@ class VipListSubscription extends AppModel
 		return false;
 	}
 
-	// public function customValidation()
-	// {
-	// 	$rules = [
-	// 		''
-	// 	];
-	// 	return $rules;
-	// }
-
+	public function defaultRules()
+	{
+		$rules = [
+			'event_id' => [
+				'required',
+				'numeric'
+			],
+			'user_id' => [
+				'required',
+				'numeric'
+			],
+			'sexo' => [
+				'required',
+				['in', ['f', 'm']]
+			]
+		];
+		return $rules;
+	}
 }

@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
+use Mayhem\Controller\Controller;
+
 use App\Model\User;
 
 use App\Controller\Component\Auth;
-
-use Mayhem\Controller\Controller;
 
 /**
  * App controller, lógica implementada aqui será visivel para todos os controllers
@@ -24,11 +24,13 @@ class AppController extends Controller
 	public function handleAuth()
 	{
 		$allowed = [
-			['controller' => 'users', 'action' => 'getAccessByFacebook'],
-			['controller' => 'users', 'action' => 'getUserTeste']
+			['users', 'getAccessByFacebook'],
+			['users', 'getUserTeste'],
+			['checkins', 'sendGCM'],
+			['checkins', 'sendIt']
 		];
 		foreach ($allowed as $value) {
-			if ($this->request->controller == $value['controller'] AND $this->request->action == $value['action']) {
+			if ($this->Request->controller() == $value[0] AND $this->Request->action() == $value[1]) {
 				return true;
 			}
 		}
@@ -42,7 +44,7 @@ class AppController extends Controller
 		];
 
 		$this->Auth = new Auth(new User, $options);
-		$this->Auth->setCredentials($this->request, $this->slim);
+		$this->Auth->setCredentials($this->Request, $this->slim);
 		$this->Auth->authorize();
 		
 		if (!$this->Auth->user) {
