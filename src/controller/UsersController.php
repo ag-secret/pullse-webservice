@@ -40,10 +40,10 @@ class UsersController extends AppController
 
 	public function getAccessByFacebook()
 	{
-		$accessToken = $this->request->headerBodyJson['access_token'];
-		$regid = $this->request->headerBodyJson['push_reg_id'];
-		$clubId = $this->request->headerBodyJson['club_id'];
-		$platform = $this->request->headerBodyJson['platform'];
+		$accessToken = $this->Request->json('access_token');
+		$regid = $this->Request->json('push_reg_id');
+		$clubId = $this->Request->json('club_id');
+		$platform = $this->Request->json('platform');
 
 		$club = new Club;
 		$query = $club->find();

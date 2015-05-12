@@ -31,7 +31,8 @@ class EventsController extends AppController
 				'Event.descricao',
 				'Event.data_inicio',
 				'Event.data_fim',
-				'Event.imagem_capa'
+				'Event.imagem_capa',
+				'Event.facebook_img'
 			])
 			->where('Event.is_active = 1')
 			->where('Event.club_id = :club_id')
@@ -53,7 +54,11 @@ class EventsController extends AppController
 			->cols([
 				'Event.id',
 				'Event.name',
-				'Event.descricao_lista_vip'
+				'Event.descricao_lista_vip',
+				'Event.imagem_capa',
+				'Event.facebook_img',
+				'Event.data_inicio',
+				'Event.lista_vip_dt_fim'
 			])
 			->where('Event.club_id = :club_id')
 			->where('Event.is_active = 1')

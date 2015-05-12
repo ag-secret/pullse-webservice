@@ -13,7 +13,7 @@ use App\Controller\Component\Auth;
  */
 class AppController extends Controller
 {
-
+	public $gcmApiKey = 'AIzaSyABl7lMCnSgjF9EltyXm5MWi3SaAJW0D1o';
 	public $Auth;
 
 	public function beforeFilter()
@@ -40,7 +40,7 @@ class AppController extends Controller
 				'id' => 'id',
 				'token' => 'app_access_token'
 			],
-			'data' => ['id', 'name', 'club_id', 'sexo']
+			'data' => ['id', 'name', 'club_id', 'sexo', 'android_gcm_device_regid']
 		];
 
 		$this->Auth = new Auth(new User, $options);
